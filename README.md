@@ -79,7 +79,15 @@ Add Section in /acl/sections
     test.custom
 
 Add test route 
+        
+    
+    Route::group(['middleware' => ['web']], function () {
+        Route::group(['middleware' => ['auth','acl']], function () {
+            Route::resource('test/custom','CustomController');
+        });
+    });
 
-    Route::resource('test/custom','CustomController');
+    
+
     
     
