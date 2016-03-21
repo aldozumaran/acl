@@ -12,4 +12,4 @@ Add to config/app.php providers
 Add to config/app.php aliases
         
           
-    'Acl' => AldoZumaran\Acl\Facades\Uploader::class,
+    'Acl' => AldoZumaran\Acl\Facades\Acl::class,
