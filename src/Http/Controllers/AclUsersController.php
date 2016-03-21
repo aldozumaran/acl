@@ -8,11 +8,19 @@ use App\Models\Acl\Permission;
 use App\Models\Acl\PermissionSectionUser;
 use App\Models\Acl\Role;
 use App\Models\Acl\Section;
-use App\Models\Auth\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class AclUsersController extends Controller
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $user = Config::get('acl.user');
+        $this->user = new $user;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +28,7 @@ class AclUsersController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        $users = $this->user->get();
         return view('acl::users.index',compact('users'));
     }
 
@@ -43,7 +51,7 @@ class AclUsersController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create($request->only('name','email'));
+        $user = $this->user->create($request->only('name','email'));
         $user->roles()->sync($request->get('roles'));
         return redirect()->route('acl.users.index');
     }
@@ -56,7 +64,7 @@ class AclUsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->user->findOrFail($id);
         
         $sections = Section::get();
         $permissions = Permission::get();
@@ -72,7 +80,7 @@ class AclUsersController extends Controller
     public function edit($id)
     {
         $roles = Role::get();
-        $user = User::findOrFail($id);
+        $user = $this->user->findOrFail($id);
         $actives = $user->roles()->lists('id')->toArray();
         return view('acl::users.create', compact('user','roles','actives'));
     }
@@ -86,7 +94,7 @@ class AclUsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = $this->user->find($id);
         $user->fill($request->only('name','email'))->save();
         $user->roles()->sync($request->get('roles'));
         return redirect()->route('acl.users.index');
@@ -101,7 +109,7 @@ class AclUsersController extends Controller
     public function destroy($id)
     {
 
-        User::destroy($id);
+        $this->user->destroy($id);
         return redirect()->route('acl.users.index');
     }
 

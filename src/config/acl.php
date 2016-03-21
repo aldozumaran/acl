@@ -10,5 +10,7 @@ return [
         'update' => 'update',
         'destroy' => 'destroy',
     ],
-    'redirectToIndex' => true
+    'redirectToIndex' => true,
+
+    'user' => '\App\User',
 ];
