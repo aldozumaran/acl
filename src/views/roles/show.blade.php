@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <form name="change-permission" id="change-permission" method="post" action="{{ route('acl.roles.permission:update,read') }}">
+    <form name="change-permission" id="change-permission" method="post" action="{{ route('acl.roles.read_update') }}">
         {{ csrf_field() }}
         {{ method_field('put') }}
         <input type="hidden" name="role_id" id="role_id" value="0" />

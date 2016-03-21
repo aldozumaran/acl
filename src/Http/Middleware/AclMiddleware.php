@@ -19,7 +19,7 @@ class AclMiddleware
 
             list($object, $permission) = $this->getAclRouteName($route);
 
-            if (!$user->hasPermission($object, $permission)) {
+            if (!$user->hasPermission($object, $permission ,true)) {
                 if ( Config::get('acl.redirectToIndex') && $user->hasPermission($object, 'read') )
                     return redirect()->route($object . "." . "index");
 

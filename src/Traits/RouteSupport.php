@@ -10,7 +10,7 @@ trait RouteSupport {
         $permission = array_pop($resourcedRouteArray);
         $object = implode('.', $resourcedRouteArray);
 
-        $permission = Config::get('acl.permissions.'.strtolower($permission), 'read');
+        $permission = Config::get('acl.permissions.'.strtolower($permission), 'denied');
 
         return [$object, $permission];
     }

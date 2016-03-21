@@ -9,6 +9,7 @@ return [
         'edit' => 'update',
         'update' => 'update',
         'destroy' => 'destroy',
+        'read_update' => ['read','update'],
     ],
     'redirectToIndex' => true,
 
