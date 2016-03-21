@@ -21,6 +21,10 @@ Add to config/app.php aliases
           
     'Acl' => AldoZumaran\Acl\Facades\Acl::class,
 
+Add in kernel.php
+
+    'acl' => \AldoZumaran\Acl\Http\Middleware\AclMiddleware::class,
+
 
 In User model add this Trait
 
