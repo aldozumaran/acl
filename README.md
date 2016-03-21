@@ -3,6 +3,13 @@ Laravel 5.2 acl
 
 # Installation
 
+Add to composer.json
+    
+    "aldozumaran/acl": "dev-master"
+    
+Run
+    "composer update"
+    
 Add to config/app.php providers
 
 
