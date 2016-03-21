@@ -78,15 +78,44 @@ Add Section in /acl/sections
 
     test.custom
 
-Add test route 
+Add ACL routes and test route
         
     
     Route::group(['middleware' => ['web']], function () {
-        Route::group(['middleware' => ['auth','acl']], function () {
-            Route::resource('test/custom','CustomController');
+        Route::group(['middleware' => 'auth'], function () {
+            Route::resource('acl/permissions', 'AldoZumaran\Acl\Http\Controllers\AclPermissionsController');
+            Route::resource('acl/sections', 'AldoZumaran\Acl\Http\Controllers\AclSectionsController');
+            Route::put('acl/roles/permission', 'AldoZumaran\Acl\Http\Controllers\AclRolesController@permission')->name('acl.roles.read_update');
+            Route::resource('acl/roles', 'AldoZumaran\Acl\Http\Controllers\AclRolesController');
+            Route::put('acl/users/permission', 'AldoZumaran\Acl\Http\Controllers\AclUsersController@permission')->name('acl.users.read_update');
+            Route::resource('acl/users', 'AldoZumaran\Acl\Http\Controllers\AclUsersController');
+        
+            Route::resource('acl', 'AldoZumaran\Acl\Http\Controllers\AclController');
+            
+            Route::group(['middleware' => 'acl'], function () {
+                Route::resource('test/custom','CustomController'); // TEST ROUTE
+            });
         });
     });
 
+
+
+    // Add User Permission
+    //Params: section, permission
+    dd($user->attachPerm('test','read'));
+
+    // Remove User Permission
+    dd($user->detachPerm('test','read'));
+        
+    //Check User Role Permission and User Permission
+    dd($user->hasPermission('test',['destroy','read','create','update'],true));
+
+    //Check User Permission
+    dd($user->hasUserPermission('test',['destroy','read','create'],true));
+
+
+    //Check User Role Permission
+    dd($user->hasRolePermission('test',['destroy','update','create'],true));
     
 
     
