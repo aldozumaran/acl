@@ -46,3 +46,36 @@ Change .env file
     
 
 Go to "laravel.app/acl/roles"
+
+# Usage
+
+This plugin works with named routes
+
+Add Roles in /acl/roles
+
+Config your named routes <b>permissions</b> in config/acl.php
+
+    'permissions' => [
+        'index' => 'read',
+        'create' => 'create',
+        'store' => 'create',
+        'show' => 'read',
+        'edit' => 'update',
+        'update' => 'update',
+        'destroy' => 'destroy',
+        ...
+    ],
+    
+Add Permissions in /acl/permissions
+
+    read, update, create, destroy
+    
+Add Section in /acl/sections
+
+    test.custom
+
+Add test route 
+
+    Route::resource('test/custom','CustomController');
+    
+    
