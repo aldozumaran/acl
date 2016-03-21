@@ -45,3 +45,4 @@ Change .env file
     CACHE_DRIVER=array
     
 
+Go to "laravel.app/acl/roles"
