@@ -70,7 +70,22 @@ Add ACL routes and test route
 
 Go to "laravel.app/acl/"
 
+Set the auth model namespace in config/acl.php
 
+    "user" => '\App\User'
+
+Set your named routes <b>permissions</b> in config/acl.php (route actions), defaults are:
+
+    'permissions' => [
+        'index' => 'read',
+        'create' => 'create',
+        'store' => 'create',
+        'show' => 'read',
+        'edit' => 'update',
+        'update' => 'update',
+        'destroy' => 'destroy',
+        ...
+    ],
 
 # Usage
 
@@ -89,23 +104,10 @@ generate
 <b>test.custom</b>.store, 
 ...
     
-Add in Section: /acl/sections (prefix resource controller) 
-es
+Add in Section: /acl/sections (prefix resource controller):
 
     test.custom
 
-Config your named routes <b>permissions</b> in config/acl.php (route actions), defaults are:
-
-    'permissions' => [
-        'index' => 'read',
-        'create' => 'create',
-        'store' => 'create',
-        'show' => 'read',
-        'edit' => 'update',
-        'update' => 'update',
-        'destroy' => 'destroy',
-        ...
-    ],
     
 Add Permissions in /acl/permissions
 
