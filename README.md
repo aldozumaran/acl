@@ -34,6 +34,8 @@ Publish views, Model...
 
     php artisan vendor:publish
     
+Run "composer dump-autoload"
+
 And create acl tables:
     
     php artisan migrate
