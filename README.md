@@ -39,3 +39,5 @@ Run "composer dump-autoload"
 And create acl tables:
     
     php artisan migrate
+
+Set "CACHE_DRIVER=array" in .env file
