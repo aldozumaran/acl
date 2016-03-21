@@ -83,11 +83,11 @@ Create a <b>TEST ROUTE</b> controller
 
     // Route::resource('test/custom','CustomController');
     
-    generate 
-    <b>test.custom</b>.index, 
-    <b>test.custom</b>.create,
-    <b>test.custom</b>.store, 
-    ...
+generate 
+<b>test.custom</b>.index, 
+<b>test.custom</b>.create,
+<b>test.custom</b>.store, 
+...
     
 Add in Section: /acl/sections (prefix resource controller) 
 es
