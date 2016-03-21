@@ -40,4 +40,8 @@ And create acl tables:
     
     php artisan migrate
 
-Set "CACHE_DRIVER=array" in .env file
+Change .env file 
+
+    CACHE_DRIVER=array
+    
+
