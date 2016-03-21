@@ -48,8 +48,29 @@ Change .env file
 
     CACHE_DRIVER=array
     
+Add ACL routes and test route
+        
+    
+    Route::group(['middleware' => ['web']], function () {
+        Route::group(['middleware' => 'auth'], function () {
+            Route::resource('acl/permissions', '\AldoZumaran\Acl\Http\Controllers\AclPermissionsController');
+            Route::resource('acl/sections', '\AldoZumaran\Acl\Http\Controllers\AclSectionsController');
+            Route::put('acl/roles/permission', '\AldoZumaran\Acl\Http\Controllers\AclRolesController@permission')->name('acl.roles.read_update');
+            Route::resource('acl/roles', '\AldoZumaran\Acl\Http\Controllers\AclRolesController');
+            Route::put('acl/users/permission', '\AldoZumaran\Acl\Http\Controllers\AclUsersController@permission')->name('acl.users.read_update');
+            Route::resource('acl/users', '\AldoZumaran\Acl\Http\Controllers\AclUsersController');
+            Route::resource('acl', '\AldoZumaran\Acl\Http\Controllers\AclController');
+            
+            Route::group(['middleware' => 'acl'], function () {
+                Route::resource('test/custom','CustomController'); // TEST ROUTE
+            });
+        });
+    });
 
-Go to "laravel.app/acl/roles"
+
+Go to "laravel.app/acl/"
+
+
 
 # Usage
 
@@ -78,24 +99,6 @@ Add Section in /acl/sections
 
     test.custom
 
-Add ACL routes and test route
-        
-    
-    Route::group(['middleware' => ['web']], function () {
-        Route::group(['middleware' => 'auth'], function () {
-            Route::resource('acl/permissions', '\AldoZumaran\Acl\Http\Controllers\AclPermissionsController');
-            Route::resource('acl/sections', '\AldoZumaran\Acl\Http\Controllers\AclSectionsController');
-            Route::put('acl/roles/permission', '\AldoZumaran\Acl\Http\Controllers\AclRolesController@permission')->name('acl.roles.read_update');
-            Route::resource('acl/roles', '\AldoZumaran\Acl\Http\Controllers\AclRolesController');
-            Route::put('acl/users/permission', '\AldoZumaran\Acl\Http\Controllers\AclUsersController@permission')->name('acl.users.read_update');
-            Route::resource('acl/users', '\AldoZumaran\Acl\Http\Controllers\AclUsersController');
-            Route::resource('acl', '\AldoZumaran\Acl\Http\Controllers\AclController');
-            
-            Route::group(['middleware' => 'acl'], function () {
-                Route::resource('test/custom','CustomController'); // TEST ROUTE
-            });
-        });
-    });
 
 
 
