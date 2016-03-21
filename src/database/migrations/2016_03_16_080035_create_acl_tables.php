@@ -53,7 +53,7 @@ class CreateAclTables extends Migration
         });
 
         // Create table for associating permissions to roles on sections (Many-to-Many)
-        Schema::create('permission_role_section', function (Blueprint $table) {
+        Schema::create('permission_role_sections', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->integer('section_id')->unsigned();
@@ -65,10 +65,11 @@ class CreateAclTables extends Migration
             $table->foreign('section_id')->references('id')->on('sections')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->primary(['permission_id', 'role_id', 'section_id']);
+            $table->timestamps();
+            $table->primary(['permission_id', 'role_id', 'section_id'], 'perms_rols_secs');
         });
         // Create table for associating permissions to users on sections (Many-to-Many)
-        Schema::create('permission_section_user', function (Blueprint $table) {
+        Schema::create('permission_section_users', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('section_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -80,7 +81,8 @@ class CreateAclTables extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->primary(['permission_id', 'section_id', 'user_id']);
+            $table->timestamps();
+            $table->primary(['permission_id', 'section_id', 'user_id'], 'perms_secs_usrs');
         });
     }
 
@@ -91,8 +93,8 @@ class CreateAclTables extends Migration
      */
     public function down()
     {
-        Schema::drop('permission_section_user');
-        Schema::drop('permission_role_section');
+        Schema::drop('permission_section_users');
+        Schema::drop('permission_role_sections');
         Schema::drop('sections');
         Schema::drop('permissions');
         Schema::drop('role_user');
