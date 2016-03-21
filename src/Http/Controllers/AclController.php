@@ -10,7 +10,7 @@ class AclController extends Controller{
 
     public function index()
     {
-        return 'index acl';
+        return view('acl::index');
     }
     public function getCheckpermission()
     {
@@ -22,7 +22,12 @@ class AclController extends Controller{
         // Check User Permission
         $user = User::findOrFail(1);
 
+        // Add User Permission
         dd($user->attachPerm('test','read'));
+
+        // Remove User Permission
+        dd($user->detachPerm('test','read'));
+
         //Check User Role Permission and User Permission
         dd($user->hasPermission('test',['destroy','read','create','update'],true));
 

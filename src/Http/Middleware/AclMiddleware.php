@@ -14,8 +14,9 @@ class AclMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
         $route = $request->route()->getName();
-        if ($route) {
-            $user = Auth::guard($guard)->user();
+
+        $user = Auth::guard($guard)->user();
+        if ($route && $user) {
 
             list($object, $permission) = $this->getAclRouteName($route);
 

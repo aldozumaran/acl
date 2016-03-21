@@ -14,11 +14,6 @@ class AclServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        if (! $this->app->routesAreCached()) {
-            require __DIR__.'/Http/routes.php';
-        }
-
         $this->publishes([
             __DIR__.'/config/acl.php' => config_path('acl.php'),
         ]);
