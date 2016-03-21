@@ -1,4 +1,4 @@
-# AldoZumaran Acl
+# Acl
 Laravel 5.2 Acl
 
 # Installation
