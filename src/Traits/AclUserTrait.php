@@ -129,10 +129,8 @@ trait AclUserTrait
             return $requireAll;
         } else {
             foreach ($this->cachedRoles() as $role) {
-                foreach ($role->cachedPermissionsRolesSections() as $pivot) {
-                    if ( $pivot->section->code == $section &&  $pivot->permission->code == $perm && $pivot->user_id == $this->id )
-                        return true;
-                }
+                if ( $role->hasPermission($section, $perm) )
+                    return true;
             }
         }
 
