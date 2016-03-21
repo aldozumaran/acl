@@ -68,7 +68,6 @@ Add ACL routes and test route
     });
 
 
-Go to "laravel.app/acl/"
 
 Set the auth model namespace in config/acl.php
 
@@ -88,6 +87,9 @@ Set your named routes <b>permissions</b> in config/acl.php (route actions), defa
     ],
 
 # Usage
+
+
+Go to <b>/acl/</b>
 
 This plugin works with named routes 
 
