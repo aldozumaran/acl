@@ -52,6 +52,10 @@ class AclUsersController extends Controller
     public function store(Request $request)
     {
         $user = $this->user->create($request->only('name','email'));
+        if ($request->get('password')){
+            $user->password = bcrypt($request->get('password'));
+            $user->save();
+        }
         $user->roles()->sync($request->get('roles'));
         return redirect()->route('acl.users.index');
     }
@@ -65,7 +69,7 @@ class AclUsersController extends Controller
     public function show($id)
     {
         $user = $this->user->findOrFail($id);
-        
+
         $sections = Section::get();
         $permissions = Permission::get();
         return view('acl::users.show', compact('user','sections','permissions'));
@@ -95,7 +99,10 @@ class AclUsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = $this->user->find($id);
-        $user->fill($request->only('name','email'))->save();
+        $user->fill($request->only('name','email'));
+        if ($request->get('password'))
+            $user->password = bcrypt($request->get('password'));
+        $user->save();
         $user->roles()->sync($request->get('roles'));
         return redirect()->route('acl.users.index');
     }
@@ -116,9 +123,9 @@ class AclUsersController extends Controller
     public function permission(PermissionSectionUser $permission, Request $request)
     {
         $response = $permission->syncPermission($request->only('user_id','section_id','permission_id'));
-      
+
         return response()->json([
-            'response' => $response, 
+            'response' => $response,
         ]);
     }
 }

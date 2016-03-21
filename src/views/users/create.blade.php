@@ -17,6 +17,10 @@
                             <label class="control-label">Email</label>
                             <input type="text"  class="form-control" name="email" value="{{ isset($user) ? $user->email : '' }}" placeholder="Email">
                         </div>
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input type="password" class="form-control" name="password" value="" placeholder="Password">
+                        </div>
                         @if (isset($roles))
                         <div class="form-group">
                             <label class="control-label">Roles</label>
