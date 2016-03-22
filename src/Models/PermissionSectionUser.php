@@ -5,6 +5,7 @@ namespace App\Models\Acl;
 use Illuminate\Database\Eloquent\Model;
 
 use AldoZumaran\Acl\Traits\AclSyncTrait;
+use Illuminate\Support\Facades\Config;
 
 class PermissionSectionUser extends Model
 {
@@ -23,6 +24,6 @@ class PermissionSectionUser extends Model
     }
     public function user()
     {
-        return $this->belongsTo('App\Models\Acl\User');
+        return $this->belongsTo(Config::get('acl.user'));
     }
 }
