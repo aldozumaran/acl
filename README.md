@@ -68,17 +68,12 @@ Add ACL routes and test route
     });
 
 
-Go to "laravel.app/acl/"
 
+Set the auth model namespace in config/acl.php
 
+    "user" => '\App\User'
 
-# Usage
-
-This plugin works with named routes
-
-Add Roles in /acl/roles
-
-Config your named routes <b>permissions</b> in config/acl.php
+Set your named routes <b>permissions</b> in config/acl.php (route actions), defaults are:
 
     'permissions' => [
         'index' => 'read',
@@ -90,35 +85,36 @@ Config your named routes <b>permissions</b> in config/acl.php
         'destroy' => 'destroy',
         ...
     ],
+
+# Usage
+
+
+Go to <b>/acl/</b>
+
+This plugin works with named routes 
+
+Create a <b>TEST ROUTE</b> controller
+
+    php artisan make:controller CustomController --resource
+
+
+    // Route::resource('test/custom','CustomController');
+    
+generate 
+<b>test.custom</b>.index, 
+<b>test.custom</b>.create,
+<b>test.custom</b>.store, 
+...
+    
+Add in Section: /acl/sections (prefix resource controller):
+
+    test.custom
+
     
 Add Permissions in /acl/permissions
 
     read, update, create, destroy
     
-Add Section in /acl/sections
 
-    test.custom
-
-
-
-
-    // Add User Permission
-    //Params: section, permission
-    dd($user->attachPerm('test','read'));
-
-    // Remove User Permission
-    dd($user->detachPerm('test','read'));
-        
-    //Check User Role Permission and User Permission
-    dd($user->hasPermission('test',['destroy','read','create','update'],true));
-
-    //Check User Permission
-    dd($user->hasUserPermission('test',['destroy','read','create'],true));
-
-
-    //Check User Role Permission
-    dd($user->hasRolePermission('test',['destroy','update','create'],true));
-    
-
-    
+Add Roles in /acl/roles
     
