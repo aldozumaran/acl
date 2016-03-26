@@ -1,0 +1,19 @@
+{
+    "name": "aldozumaran/acl",
+    "description": " Laravel 5.2 ACL",
+    "require": {
+        "laravel/framework": "^5.2"
+    },
+    "authors": [
+        {
+            "name": "Aldo Zumaran",
+            "email": "zumaran.aldo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+      "psr-4": {
+        "AldoZumaran\\Acl\\": "src/"
+      }
+    }
+}

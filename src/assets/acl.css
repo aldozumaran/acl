@@ -1,0 +1,10 @@
+.acl-change-status{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
+	background-image: url('alert.png');
+}
+.acl-change-status.active{
+	background-image: url('check.png');
+}
