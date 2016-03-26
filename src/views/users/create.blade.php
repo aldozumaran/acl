@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
                 <h1>{{ isset($user) ? 'Update' : 'Create' }} User</h1>
                 <div>
-                    <form name="save-user" method="post" action="{{ isset($user) ? route('acl.users.update',$user)  : route('acl.users.store') }}">
+                    <form name="save-user" method="post" action="{{ isset($user) ? Acl::route('users','update',$user)  : Acl::route('users','store') }}">
                         {{ csrf_field() }}
                         {{ isset($user) ? method_field('put') : '' }}
                         <div class="form-group">

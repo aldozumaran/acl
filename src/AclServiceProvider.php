@@ -27,7 +27,7 @@ class AclServiceProvider extends ServiceProvider
         ], 'public');
 
         $this->publishes([
-            __DIR__.'/database/migrations/' => database_path('migrations')
+            __DIR__.'/database' => database_path('/')
         ], 'migrations');
 
         $this->loadViewsFrom(__DIR__.'/views', 'acl');

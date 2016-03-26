@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
                 <h1>{{ isset($permission) ? 'Update' : 'Create' }} Permission</h1>
                 <div>
-                    <form name="save-permission" method="post" action="{{ isset($permission) ? route('acl.permissions.update',$permission)  : route('acl.permissions.store') }}">
+                    <form name="save-permission" method="post" action="{{ isset($permission) ? Acl::route('permissions','update',$permission)  : Acl::route('permissions','store') }}">
                         {{ csrf_field() }}
                         {{ isset($permission) ? method_field('put') : '' }}
                         <div class="form-group">

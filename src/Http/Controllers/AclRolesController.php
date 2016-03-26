@@ -12,6 +12,12 @@ use App\Models\Acl\PermissionRoleSection;
 
 class AclRolesController extends Controller
 {
+    private $route;
+
+    public function __construct()
+    {
+        $this->route = \Acl::route('roles','index',[],false);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +48,7 @@ class AclRolesController extends Controller
     public function store(Request $request)
     {
         Role::create($request->only('code','name','description'));
-        return redirect()->route('acl.roles.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -84,7 +90,7 @@ class AclRolesController extends Controller
         $role = Role::find($id);
         $role->fill($request->only('code','name','description'))->save();
 
-        return redirect()->route('acl.roles.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -97,7 +103,7 @@ class AclRolesController extends Controller
     {
 
         Role::destroy($id);
-        return redirect()->route('acl.roles.index');
+        return redirect()->route($this->route);
     }
     public function permission(PermissionRoleSection $permission, Request $request)
     {

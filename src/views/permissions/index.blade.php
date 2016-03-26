@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                 <h1>Permissions administration</h1>
                 <div class="form-group">
-                    <a href="{{ route('acl.permissions.create') }}" class="btn btn-primary">Add Permission</a>
+                    <a href="{{ Acl::route('permissions','create') }}" class="btn btn-primary">Add Permission</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-condensed">
@@ -27,10 +27,10 @@
                                     <td>{{ $permission->name }}</td>
                                     <td>{{ $permission->description }}</td>
                                     <td>
-                                        <a href="{{ route('acl.permissions.edit', $permission->id) }}" class="btn">
+                                        <a href="{{ Acl::route('permissions','edit', $permission->id) }}" class="btn">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </a>
-                                        <form name="delete-permission" action="{{ route('acl.permissions.destroy', $permission->id) }}" method="post" style="display: inline">
+                                        <form name="delete-permission" action="{{ Acl::route('permissions','destroy', $permission->id) }}" method="post" style="display: inline">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}
                                             <a onclick="$(this).closest('form').submit();" class="btn" style="color:red;">
