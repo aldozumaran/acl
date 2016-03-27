@@ -28,7 +28,7 @@ class Acl
     	$prefix = Config::get('acl.route_prefix','');
 
     	
-    	\Route::group( [ 'middleware' => ['auth',$mdw], 'prefix' => $prefix ], function () {
+    	\Route::group( [ 'middleware' => [$mdw], 'prefix' => $prefix ], function () {
 	        
             $permissions = Config::get('acl.routes.permissions','acl/permissions');
             $sections = Config::get('acl.routes.sections','acl/sections');
