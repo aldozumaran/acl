@@ -131,7 +131,7 @@ Default Configuration in config/acl.php
     // L5.2 Guard auth
     'guard' => 'web',
 
-    //Set the auth model namespace in config/acl.php
+    //Set the auth model namespace
     'user' => '\App\User',
     
     //route acl prefix . EX. admin/ set admin

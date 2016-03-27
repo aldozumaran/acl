@@ -36,6 +36,26 @@ class AclTableSeeder extends Seeder
             'name'     => 'Super Administrator',
             'description'  => 'Super Administrator'
         ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.roles',
+            'name'     => 'Acl Roles',
+            'description'  => 'Acl Roles administration'
+        ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.users',
+            'name'     => 'Acl Users',
+            'description'  => 'Acl Users administration'
+        ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.sections',
+            'name'     => 'Acl Sections',
+            'description'  => 'Acl Sections administration'
+        ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.permissions',
+            'name'     => 'Acl Permissions',
+            'description'  => 'Acl Permissions administration'
+        ]);
         $section = factory(App\Models\Acl\Section::class)->create([
             'code'      => 'test.custom',
             'name'     => 'Test controller',
