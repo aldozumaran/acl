@@ -22,7 +22,7 @@ return [
         'permissions' => 'acl/permissions',
         'index' => 'acl',
     ],
-    'granted_roles' => 'admin',
+    'granted_roles' => '',
     'role_admin' => 'super-admin',
     'email_admin' => 'i@am.me',
     'http_status' => 403,
