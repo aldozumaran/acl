@@ -43,9 +43,9 @@ class AclTableSeeder extends Seeder
         ]);
 
         $user = factory(App\Models\Auth\User::class)->create([
-            'name'      => 'Aldo Zumaran',
-            'email'     => 'a.zumaran@idsign.it',
-            'password'  => bcrypt('sakur@')
+            'name'      => 'John Doe',
+            'email'     => 'j.doe@is.me',
+            'password'  => bcrypt('j.doe')
         ])->each(function($u) use ($sadmin) {
             $u->roles()->save($sadmin);
         });
