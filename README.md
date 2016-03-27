@@ -147,7 +147,7 @@ Default Configuration in config/acl.php
     ],
 
     // roles with access to acl
-    'granted_roles' => 'admin',
+    'granted_roles' => '', // 'admin' or 'admin,webmaster' or ['admin','webmaster']
 
     // super admin role
     'role_admin' => 'super-admin',
