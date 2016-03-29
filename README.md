@@ -52,11 +52,11 @@ And create acl tables:
         // Create default user
         // Add permissions to default user for test route
 
-        //Add in database/seeds/DatabaseSeeder.php
+//Add in database/seeds/DatabaseSeeder.php
 
         $this->call(AclTableSeeder::class);
 
-        //Add in database/factories/ModelFactory.php
+//Add in database/factories/ModelFactory.php
 
         $factory->define(App\Models\Acl\Role::class, function (Faker\Generator $faker) {
             return [
@@ -95,9 +95,9 @@ And create acl tables:
         });
     */
      
-    composer dump-autoload
+composer dump-autoload
 
-    php artisan migrate --seed
+php artisan migrate --seed
 
     
 Add ACL routes and test route
