@@ -37,6 +37,10 @@ In User model add this Trait
 Publish views, Model...
 
     php artisan vendor:publish
+
+Change .env file 
+
+    CACHE_DRIVER=array
     
 And create acl tables: 
     
@@ -95,9 +99,6 @@ And create acl tables:
 
     php artisan migrate --seed
 
-Change .env file 
-
-    CACHE_DRIVER=array
     
 Add ACL routes and test route
     
