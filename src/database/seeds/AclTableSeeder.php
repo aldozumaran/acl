@@ -35,27 +35,6 @@ class AclTableSeeder extends Seeder
             'code'      => 'super-admin',
             'name'     => 'Super Administrator',
             'description'  => 'Super Administrator'
-        ]);  
-
-        factory(App\Models\Acl\Section::class)->create([
-            'code'      => 'acl.roles',
-            'name'     => 'Acl Roles',
-            'description'  => 'Acl Roles administration'
-        ]);
-        factory(App\Models\Acl\Section::class)->create([
-            'code'      => 'acl.users',
-            'name'     => 'Acl Users',
-            'description'  => 'Acl Users administration'
-        ]);
-        factory(App\Models\Acl\Section::class)->create([
-            'code'      => 'acl.sections',
-            'name'     => 'Acl Sections',
-            'description'  => 'Acl Sections administration'
-        ]);
-        factory(App\Models\Acl\Section::class)->create([
-            'code'      => 'acl.permissions',
-            'name'     => 'Acl Permissions',
-            'description'  => 'Acl Permissions administration'
         ]);
         $section = factory(App\Models\Acl\Section::class)->create([
             'code'      => 'test.custom',
@@ -64,13 +43,11 @@ class AclTableSeeder extends Seeder
         ]);
 
         $user = factory(App\User::class)->create([
-            'name'      => 'Aldo Zumaran',
-            'email'     => 'a.zumaran@idsign.it',
-            'password'  => bcrypt('sakur@')
-        ])->each(function($u) use ($sadmin) {
-            $u->roles()->save($sadmin);
-        });
-
+            'name'      => 'John Doe',
+            'email'     => 'john.doe@is.me',
+            'password'  => bcrypt('doe')
+        ]);
+        $user->roles()->save($sadmin);
         factory(App\Models\Acl\PermissionRoleSection::class)->create([
             'permission_id' => $read->id,
             'role_id'       => $sadmin->id,
