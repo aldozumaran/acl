@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                 <h1>Users administration</h1>
                 <div class="form-group">
-                    <a href="{{ route('acl.users.create') }}" class="btn btn-primary">Add User</a>
+                    <a href="{{ Acl::route('users','create') }}" class="btn btn-primary">Add User</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-condensed">
@@ -25,13 +25,13 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <a href="{{ route('acl.users.edit', $user->id) }}" class="btn">
+                                        <a href="{{ Acl::route('users','edit', $user->id) }}" class="btn">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </a>
-                                        <a href="{{ route('acl.users.show', $user->id) }}" class="btn">
+                                        <a href="{{ Acl::route('users','show', $user->id) }}" class="btn">
                                             <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
                                         </a>
-                                        <form name="delete-user" action="{{ route('acl.users.destroy', $user->id) }}" method="post" style="display: inline">
+                                        <form name="delete-user" action="{{ Acl::route('users','destroy', $user->id) }}" method="post" style="display: inline">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}
                                             <a onclick="$(this).closest('form').submit();" class="btn" style="color:red;">

@@ -10,6 +10,13 @@ use App\Http\Requests;
 
 class AclSectionsController extends Controller
 {
+
+    private $route;
+
+    public function __construct()
+    {
+        $this->route = \Acl::route('sections','index',[],false);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +47,7 @@ class AclSectionsController extends Controller
     public function store(Request $request)
     {
         Section::create($request->only('code','name','description'));
-        return redirect()->route('acl.sections.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -78,7 +85,7 @@ class AclSectionsController extends Controller
         $section = Section::find($id);
         $section->fill($request->only('code','name','description'))->save();
 
-        return redirect()->route('acl.sections.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -91,6 +98,6 @@ class AclSectionsController extends Controller
     {
 
         Section::destroy($id);
-        return redirect()->route('acl.sections.index');
+        return redirect()->route($this->route);
     }
 }

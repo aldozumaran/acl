@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Config;
 class AclUsersController extends Controller
 {
     protected $user;
+    private $route;
 
     public function __construct()
     {
         $user = Config::get('acl.user');
         $this->user = new $user;
+        $this->route = \Acl::route('users','index',[],false);
     }
     /**
      * Display a listing of the resource.
@@ -57,7 +59,7 @@ class AclUsersController extends Controller
             $user->save();
         }
         $user->roles()->sync($request->get('roles'));
-        return redirect()->route('acl.users.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -104,7 +106,7 @@ class AclUsersController extends Controller
             $user->password = bcrypt($request->get('password'));
         $user->save();
         $user->roles()->sync($request->get('roles'));
-        return redirect()->route('acl.users.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -117,7 +119,7 @@ class AclUsersController extends Controller
     {
 
         $this->user->destroy($id);
-        return redirect()->route('acl.users.index');
+        return redirect()->route($this->route);
     }
 
     public function permission(PermissionSectionUser $permission, Request $request)

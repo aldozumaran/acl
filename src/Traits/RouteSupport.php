@@ -14,4 +14,10 @@ trait RouteSupport {
 
         return [$object, $permission];
     }
+    public function getAclRouteController($route){
+        $prefix = Config::get('acl.route_prefix','');
+        if ($prefix!='')
+            $prefix.='.';
+        return $prefix.$route;
+    }
 }

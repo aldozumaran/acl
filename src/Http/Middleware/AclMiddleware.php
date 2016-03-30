@@ -11,23 +11,32 @@ class AclMiddleware
 {
     use RouteSupport;
 
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next, $role = null)
     {
         $route = $request->route()->getName();
 
-        $user = Auth::guard($guard)->user();
+        $user = auth(Config::get('acl.guard', null))->user();
         if ($route && $user) {
 
             list($object, $permission) = $this->getAclRouteName($route);
+            
+            $role_admin = Config::get('acl.role_admin', '');
+            if ($role_admin != '' && $user->hasRole($role_admin))
+                return $next($request);
 
-            if (!$user->hasPermission($object, $permission ,true)) {
-                if ( Config::get('acl.redirectToIndex') && $user->hasPermission($object, 'read') )
+            $email_admin = Config::get('acl.email_admin', '');
+            if ($email_admin != '' && $user->email == $email_admin )
+                return $next($request);
+
+            if (!$user->hasPermission($object, $permission ,true) && ($role != null && !$user->hasRole($role,true))) {
+                if ( Config::get('acl.redirect_to_index') && $user->hasPermission($object, 'read') )
                     return redirect()->route($object . "." . "index");
-
+                
+                $http_status = Config::get('acl.http_status', 500);
                 if ($request->ajax() || $request->wantsJson())
-                    return response('Unauthorized.', 403);
+                    return response('Unauthorized.', $http_status);
                 else
-                    abort(403);
+                    abort($http_status);
             }
         }
         return $next($request);

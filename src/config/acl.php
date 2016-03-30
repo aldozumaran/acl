@@ -11,7 +11,19 @@ return [
         'destroy' => 'destroy',
         'read_update' => ['read','update'],
     ],
-    'redirectToIndex' => true,
-
+    'redirect_to_index' => true,
+    'guard' => 'web',
     'user' => '\App\Models\Auth\User',
+    'route_prefix' => '',
+    'routes' => [
+        'roles' => 'acl/roles',
+        'users' => 'acl/users',
+        'sections' => 'acl/sections',
+        'permissions' => 'acl/permissions',
+        'index' => 'acl',
+    ],
+    'granted_roles' => '',
+    'role_admin' => 'super-admin',
+    'email_admin' => 'i@am.me',
+    'http_status' => 403,
 ];

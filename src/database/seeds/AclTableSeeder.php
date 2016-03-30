@@ -1,0 +1,95 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class AclTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $read = factory(App\Models\Acl\Permission::class)->create([
+            'code'      => 'read',
+            'name'     => 'read',
+            'description'  => 'read'
+        ]);
+        $update = factory(App\Models\Acl\Permission::class)->create([
+            'code'      => 'update',
+            'name'     => 'update',
+            'description'  => 'update'
+        ]);
+        $destroy = factory(App\Models\Acl\Permission::class)->create([
+            'code'      => 'destroy',
+            'name'     => 'destroy',
+            'description'  => 'destroy'
+        ]);
+        $create = factory(App\Models\Acl\Permission::class)->create([
+            'code'      => 'create',
+            'name'     => 'create',
+            'description'  => 'create'
+        ]);
+        $sadmin = factory(App\Models\Acl\Role::class)->create([
+            'code'      => 'super-admin',
+            'name'     => 'Super Administrator',
+            'description'  => 'Super Administrator'
+        ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.roles',
+            'name'     => 'Acl Roles',
+            'description'  => 'Acl Roles administration'
+        ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.users',
+            'name'     => 'Acl Users',
+            'description'  => 'Acl Users administration'
+        ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.sections',
+            'name'     => 'Acl Sections',
+            'description'  => 'Acl Sections administration'
+        ]);
+        factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'acl.permissions',
+            'name'     => 'Acl Permissions',
+            'description'  => 'Acl Permissions administration'
+        ]);
+        $section = factory(App\Models\Acl\Section::class)->create([
+            'code'      => 'test.custom',
+            'name'     => 'Test controller',
+            'description'  => 'Test controller section'
+        ]);
+
+        $user = factory(App\Models\Auth\User::class)->create([
+            'name'      => 'John Doe',
+            'email'     => 'j.doe@is.me',
+            'password'  => bcrypt('j.doe')
+        ])->each(function($u) use ($sadmin) {
+            $u->roles()->save($sadmin);
+        });
+
+        factory(App\Models\Acl\PermissionRoleSection::class)->create([
+            'permission_id' => $read->id,
+            'role_id'       => $sadmin->id,
+            'section_id'    => $section->id
+        ]);
+        factory(App\Models\Acl\PermissionRoleSection::class)->create([
+            'permission_id' => $update->id,
+            'role_id'       => $sadmin->id,
+            'section_id'    => $section->id
+        ]);
+        factory(App\Models\Acl\PermissionRoleSection::class)->create([
+            'permission_id' => $destroy->id,
+            'role_id'       => $sadmin->id,
+            'section_id'    => $section->id
+        ]);
+
+        factory(App\Models\Acl\PermissionSectionUser::class)->create([
+            'permission_id' => $create->id,
+            'section_id'    => $section->id,
+            'user_id'       => $user->id
+        ]);
+    }
+}

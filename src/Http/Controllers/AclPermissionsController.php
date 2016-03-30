@@ -11,6 +11,15 @@ use App\Http\Requests;
 class AclPermissionsController extends Controller
 {
     /**
+     * @var
+     */
+    private $route;
+
+    public function __construct()
+    {
+        $this->route = \Acl::route('permissions','index',[],false);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -40,7 +49,7 @@ class AclPermissionsController extends Controller
     public function store(Request $request)
     {
         Permission::create($request->only('code','name','description'));
-        return redirect()->route('acl.permissions.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -78,7 +87,7 @@ class AclPermissionsController extends Controller
         $permission = Permission::find($id);
         $permission->fill($request->only('code','name','description'))->save();
 
-        return redirect()->route('acl.permissions.index');
+        return redirect()->route($this->route);
     }
 
     /**
@@ -91,6 +100,6 @@ class AclPermissionsController extends Controller
     {
 
         Permission::destroy($id);
-        return redirect()->route('acl.permissions.index');
+        return redirect()->route($this->route);
     }
 }

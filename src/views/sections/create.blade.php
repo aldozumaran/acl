@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
                 <h1>{{ isset($section) ? 'Update' : 'Create' }} Section</h1>
                 <div>
-                    <form name="save-section" method="post" action="{{ isset($section) ? route('acl.sections.update',$section)  : route('acl.sections.store') }}">
+                    <form name="save-section" method="post" action="{{ isset($section) ? Acl::route('sections','update',$section)  : Acl::route('sections','store') }}">
                         {{ csrf_field() }}
                         {{ isset($section) ? method_field('put') : '' }}
                         <div class="form-group">

@@ -40,7 +40,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ route('acl.index') }}">
+                <a class="navbar-brand" href="{{ Acl::route('index') }}">
                     Laravel Acl
                 </a>
             </div>
@@ -48,10 +48,10 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('acl.roles.index') }}">Roles</a></li>
-                    <li><a href="{{ route('acl.users.index') }}">Users</a></li>
-                    <li><a href="{{ route('acl.sections.index') }}">Sections</a></li>
-                    <li><a href="{{ route('acl.permissions.index') }}">Permissions</a></li>
+                    <li><a href="{{ Acl::route('roles') }}">Roles</a></li>
+                    <li><a href="{{ Acl::route('users') }}">Users</a></li>
+                    <li><a href="{{ Acl::route('sections') }}">Sections</a></li>
+                    <li><a href="{{ Acl::route('permissions') }}">Permissions</a></li>
                 </ul>
 
             </div>

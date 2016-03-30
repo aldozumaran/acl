@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                 <h1>Sections administration</h1>
                 <div class="form-group">
-                    <a href="{{ route('acl.sections.create') }}" class="btn btn-primary">Add Section</a>
+                    <a href="{{ Acl::route('sections','create') }}" class="btn btn-primary">Add Section</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-condensed">
@@ -27,10 +27,10 @@
                                     <td>{{ $section->name }}</td>
                                     <td>{{ $section->description }}</td>
                                     <td>
-                                        <a href="{{ route('acl.sections.edit', $section->id) }}" class="btn">
+                                        <a href="{{ Acl::route('sections','edit', $section->id) }}" class="btn">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </a>
-                                        <form name="delete-section" action="{{ route('acl.sections.destroy', $section->id) }}" method="post" style="display: inline">
+                                        <form name="delete-section" action="{{ Acl::route('sections','destroy', $section->id) }}" method="post" style="display: inline">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}
                                             <a onclick="$(this).closest('form').submit();" class="btn" style="color:red;">
