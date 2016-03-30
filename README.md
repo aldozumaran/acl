@@ -5,7 +5,7 @@ Laravel 5.2 Acl
 
 Add to composer.json
     
-    "aldozumaran/acl": "dev-master"
+    "aldozumaran/acl": "1.*"
     
 Run
     "composer update"
