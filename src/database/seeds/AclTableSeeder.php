@@ -35,7 +35,7 @@ class AclTableSeeder extends Seeder
             'code'      => 'super-admin',
             'name'     => 'Super Administrator',
             'description'  => 'Super Administrator'
-        ]);
+        ]); 
 
         factory(App\Models\Acl\Section::class)->create([
             'code'      => 'acl.roles',
