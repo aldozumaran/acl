@@ -23,12 +23,9 @@ class Acl
 
     public function routes()
     {
-    	$granted_roles = Config::get('acl.granted_roles',null);
-    	$mdw = $granted_roles ? 'acl:'.(is_array($granted_roles) ? implode(',', $granted_roles) : $granted_roles) : 'acl';
     	$prefix = Config::get('acl.route_prefix','');
-
     	
-    	\Route::group( [ 'middleware' => [$mdw], 'prefix' => $prefix ], function () {
+    	\Route::group( [ 'middleware' => ['acl'], 'prefix' => $prefix ], function () {
 	        
             $permissions = Config::get('acl.routes.permissions','acl/permissions');
             $sections = Config::get('acl.routes.sections','acl/sections');

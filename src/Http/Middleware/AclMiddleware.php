@@ -11,12 +11,19 @@ class AclMiddleware
 {
     use RouteSupport;
 
-    public function handle($request, Closure $next, $role = null)
+    public function handle($request, Closure $next)
     {
         $route = $request->route()->getName();
 
-        $user = auth(Config::get('acl.guard', null))->user();
-        if ($route && $user) {
+        if ($route) {
+
+            $user = auth(Config::get('acl.guard', null))->user();
+            if (!$user){
+                if ($request->ajax() || $request->wantsJson())
+                    return response('Acl configuration error', 503);
+                else
+                    return redirect(rtrim(Config::get('acl.route_prefix', ''),'/').'/');
+            }
 
             list($object, $permission) = $this->getAclRouteName($route);
             
@@ -28,7 +35,20 @@ class AclMiddleware
             if ($email_admin != '' && $user->email == $email_admin )
                 return $next($request);
 
-            if (!$user->hasPermission($object, $permission ,true) && ($role != null && !$user->hasRole($role,true))) {
+            $role = Config::get('acl.granted_roles', null);
+            if ($role != null)
+                $role = explode(',',$role);
+
+            if ($role != null && $user->hasRole($role)){
+                $prefix = rtrim(Config::get('acl.route_prefix',''),'/');
+                if ($prefix != '') $prefix.='/';
+                foreach (Config::get('acl.routes') as $route) {
+                    if (str_replace('/','.',$prefix.$route) == $object){
+                        return $next($request);
+                    }
+                }
+            }
+            if (!$user->hasPermission($object, $permission ,true) ) {
                 if ( Config::get('acl.redirect_to_index') && $user->hasPermission($object, 'read') )
                     return redirect()->route($object . "." . "index");
                 

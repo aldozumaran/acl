@@ -36,6 +36,7 @@ class AclTableSeeder extends Seeder
             'name'     => 'Super Administrator',
             'description'  => 'Super Administrator'
         ]);
+
         factory(App\Models\Acl\Section::class)->create([
             'code'      => 'acl.roles',
             'name'     => 'Acl Roles',
@@ -62,10 +63,10 @@ class AclTableSeeder extends Seeder
             'description'  => 'Test controller section'
         ]);
 
-        $user = factory(App\Models\Auth\User::class)->create([
-            'name'      => 'John Doe',
-            'email'     => 'j.doe@is.me',
-            'password'  => bcrypt('j.doe')
+        $user = factory(App\User::class)->create([
+            'name'      => 'Aldo Zumaran',
+            'email'     => 'a.zumaran@idsign.it',
+            'password'  => bcrypt('sakur@')
         ])->each(function($u) use ($sadmin) {
             $u->roles()->save($sadmin);
         });

@@ -13,7 +13,7 @@ return [
     ],
     'redirect_to_index' => true,
     'guard' => 'web',
-    'user' => '\App\Models\Auth\User',
+    'user' => '\App\User',
     'route_prefix' => '',
     'routes' => [
         'roles' => 'acl/roles',
