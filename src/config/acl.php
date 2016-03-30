@@ -13,5 +13,5 @@ return [
     ],
     'redirectToIndex' => true,
 
-    'user' => '\App\User',
+    'user' => '\App\Models\Auth\User',
 ];
