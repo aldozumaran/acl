@@ -42,7 +42,7 @@ class AclTableSeeder extends Seeder
             'description'  => 'Test controller section'
         ]);
 
-        $user = factory(App\User::class)->create([
+        $user = factory(Config::get('acl.user','\App\User'))->create([
             'name'      => 'John Doe',
             'email'     => 'john.doe@is.me',
             'password'  => bcrypt('doe')
