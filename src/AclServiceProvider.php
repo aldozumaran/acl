@@ -31,12 +31,11 @@ class AclServiceProvider extends ServiceProvider
         ], 'migrations');
 
 
+        $this->loadViewsFrom(__DIR__.'/views', 'acl');
+        
         $this->publishes([
-            __DIR__.'/views' => resource_path('views/vendor/aldozumaran/acl'),
+            __DIR__.'/views' => resource_path('views/vendor/acl'),
         ]);
-        
-        
-        $this->loadViewsFrom(__DIR__.'/views', 'aldozumaran/acl');
 
     }
 
