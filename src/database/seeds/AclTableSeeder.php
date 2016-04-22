@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\Config;
 class AclTableSeeder extends Seeder
 {
     /**
