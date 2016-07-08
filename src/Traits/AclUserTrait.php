@@ -76,7 +76,7 @@ trait AclUserTrait
 
             return $requireAll;
         } else {
-            foreach ($this->cachedRoles() as $role) {
+            foreach ($this->roles as $role) {
                 if ($role->code == $name) {
                     return true;
                 }
