@@ -102,7 +102,7 @@ trait AclUserTrait
             return $requireAll;
         } else {
             foreach ($this->cachedPermissionsSectionsUsers() as $pivot) {
-                if ( 
+                if (
                     $pivot->section->code == $section &&  
                     $pivot->permission->code == $perm && 
                     $pivot->user_id == $this->id 
@@ -128,7 +128,7 @@ trait AclUserTrait
 
             return $requireAll;
         } else {
-            foreach ($this->cachedRoles() as $role) {
+            foreach ($this->roles as $role) {
                 if ( $role->hasPermission($section, $perm) )
                     return true;
             }
@@ -156,7 +156,7 @@ trait AclUserTrait
         } else {
             if ($hasRole = $this->hasRolePermission($section,$perm, $requireAll))
                 return true;
-            elseif ($hasRole = $this->hasuserPermission($section,$perm, $requireAll))
+            elseif ($hasRole = $this->hasUserPermission($section,$perm, $requireAll))
                 return true;
         }
 
